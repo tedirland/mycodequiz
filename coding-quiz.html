@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Coding Quiz</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src='questions.js'></script>
+</head>
+
+<body id="mainContent">
+
+    <style>
+        #jumbotron {
+            text-align: center;
+
+        };
+
+    </style>
+
+    <div class="jumbotron">
+
+        <h2 class="display-1"><strong> Coding Quiz</strong> </h2>
+        <p><strong> Try to answer the coding questions in the time allotted! You will be given a limited amount of time
+                to answer, so work quickly! </strong> </p>
+        <br>
+        <p><strong>At the end of the time given, you will be given a score based on the amount of correct answers and
+                time remaining.</strong></p>
+        <p>Click the button below to get started!</p>
+        <button type="button" class="btn btn-secondary">Start Quiz</button>
+
+        <script>
+
+            // Create the Event Listener on button to start quiz
+            $(".btn btn-secondary").on("click", startQuiz()
+
+
+            );
+
+
+            // Creating Functions here
+
+            function startQuiz() {
+
+                $("#mainContent").empty();
+
+            }
+
+
+
+
+
+        </script>
+    </div>
+</body>
+
+</html>
