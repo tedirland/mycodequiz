@@ -18,10 +18,11 @@
 
     <div class="d-flex flex-row bd-highlight">
         <div id='seconds'>75</div>
-        
+
     </div>
 
-     </nav>
+</nav>
+
 <body id="mainContent">
 
     <style>
@@ -33,16 +34,14 @@
         ul {
             list-style: none;
         }
-
-        
     </style>
 
     <div id="quiz">
 
-    
-    <!-- Empty Div to put quiz content -->
-    
-    
+
+        <!-- Empty Div to put quiz content -->
+
+
     </div>
 
     <div class="jumbotron">
@@ -61,22 +60,37 @@
 
     <script>
 
-// Event Listener 
-       
-
-      //Write a  function to create start a timer that begins counting down    
+        // Event Listeners
 
 
-      $('#myButton').on('click', () => {
-
-        startQuiz();
-        renderQuestions();
-        setTime();
+        //Write a  function to create start a timer that begins counting down    
 
 
-      });
+        $('#myButton').on('click', () => {
+
+            startQuiz();
+            renderQuestions();
+            setTime();
+            checkanswers();
 
 
+        });
+
+
+
+        $('#choices').on('click', () => {
+
+            function checkanswers() {
+
+                if (this.questions[i].choice) {
+                    
+                }
+
+            }
+
+
+
+        })
 
 
 

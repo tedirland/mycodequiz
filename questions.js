@@ -15,12 +15,15 @@ var interval;
 
 //Score and Question Index Variables
 
-// let lastQuestionIndex = questions.length - 1;
+var score = 0;
+
 let runningQuestionIndex = 0;
 
 // var score = 0;
 // // var lastQuestionIndex = questions.length - 1;
 // var runningQuestionIndex = 0;
+
+
 
 
 // Questions Stored in an Object
@@ -89,52 +92,84 @@ function startTimer() {
 // Gets formatted seconds to plug into the seconds element
 
 function setTime() {
-var timerInterval = setInterval(function(){
+  var timerInterval = setInterval(function () {
 
-  secondsLeft--;
-  $("#seconds").text(secondsLeft)
+    secondsLeft--;
+    $("#seconds").text(secondsLeft)
 
-  if(secondsLeft === 0) {
-    clearInterval(timerInterval)
+    if (secondsLeft === 0) {
+      clearInterval(timerInterval)
+    }
+
+  }, 1000);
+}
+
+
+// function checkAnswers() {
+
+//   if (questions[runningQuestionIndex].answer == )
+
+
+
+//     // }
+    // Rendering Questions
+
+    function renderQuestions() {
+
+      let lastQuestionIndex = questions.length - 1;
+      let choiceIndex=0;
+
+      // for (var i = 0; i < questions.length; i++) {
+
+
+      $(".jumbotron").html("<card>" +
+
+        "<h1>" + questions[runningQuestionIndex].title + "</h1>" +
+
+        "<ul>" +
+
+        "<li>" + "<button id= 'choiceA' class='btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex] + "</button>" + "</li>" +
+
+        "<li>" + "<button id= 'choiceB' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex+1] + "</button>" + "</li>" +
+
+        "<li>" + "<button  id= 'choiceC'class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex+2] + "</button>" + "</li>" +
+
+        "<li>" + "<button id= 'choiceD' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex+3] + "</button>" + "</li>" +
+
+        "</ul>" +
+
+
+        "</card>");
+
+        // console.log(event.target);
+    
+      $('.btn').on("click", () => {
+
+        // checkAnswers();
+        runningQuestionIndex++;
+        renderQuestions();
+
+
+
+
+
+      })
+
+
+
+    };
+
+  // }
+
+
+
+  // Score Functions
+
+  function answerIsCorrect() {
+
+
   }
 
-}, 1000);
-}
+  function answerisWrong() {
 
-
-// Rendering Questions
-
-function renderQuestions() {
-
-  $(".jumbotron").append("<card>" + 
-  
-  "<h1>" + questions[0].title + "</h1>" +
-
-    "<ul>" +
-
-    "<li>" + "<button>" + questions[0].choices[0] + "</button>" + "</li>" +
-
-    "<li>" + "<button>" + questions[0].choices[1] + "</button>" + "</li>" +
-
-    "<li>" + "<button>" + questions[0].choices[2] + "</button>" + "</li>" +
-
-    "<li>" + "<button>" + questions[0].choices[3] + "</button>" + "</li>" +
-
-    "</ul>" +
-
-
-    "</card>");
-
-};
-
-
-// Score Functions
-
-function answerIsCorrect() {
-
-
-}
-
-function answerisWrong() {
-
-}
+  }
