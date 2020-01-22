@@ -9,17 +9,41 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src='questions.js'></script>
-</head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+
+</head>
+<nav class='navbar navbar-light bg-light'>
+    <a class="navbar-brand" href='#'>View High Scores</a>
+
+    <div class="d-flex flex-row bd-highlight">
+        <div id='seconds'>75</div>
+        
+    </div>
+
+     </nav>
 <body id="mainContent">
 
     <style>
-        #jumbotron {
+        #display {
             text-align: center;
 
-        };
+        }
 
+        ul {
+            list-style: none;
+        }
+
+        
     </style>
+
+    <div id="quiz">
+
+    
+    <!-- Empty Div to put quiz content -->
+    
+    
+    </div>
 
     <div class="jumbotron">
 
@@ -27,34 +51,46 @@
         <p><strong> Try to answer the coding questions in the time allotted! You will be given a limited amount of time
                 to answer, so work quickly! </strong> </p>
         <br>
-        <p><strong>At the end of the time given, you will be given a score based on the amount of correct answers and
+        <p><strong>At the end of the time given, youh2 will be given a score based on the amount of correct answers and
                 time remaining.</strong></p>
         <p>Click the button below to get started!</p>
-        <button type="button" class="btn btn-secondary">Start Quiz</button>
-
-        <script>
-
-            // Create the Event Listener on button to start quiz
-            $(".btn btn-secondary").on("click", startQuiz()
+        <button type="button" id="myButton">Start Quiz</button>
 
 
-            );
-
-
-            // Creating Functions here
-
-            function startQuiz() {
-
-                $("#mainContent").empty();
-
-            }
-
-
-
-
-
-        </script>
     </div>
+
+    <script>
+
+// Event Listener 
+       
+
+      //Write a  function to create start a timer that begins counting down    
+
+
+      $('#myButton').on('click', () => {
+
+        startQuiz();
+        renderQuestions();
+        setTime();
+
+
+      });
+
+
+
+
+
+
+
+
+
+    </script>
 </body>
 
 </html>
+
+<!-- To Do:
+
+1. Get Event listener to clear content on body
+2. Start displaying the questions, need to dynamically assign the text content of the questions arrays to the buttons (this, similar to the refrigerator exercise)
+3. -->
