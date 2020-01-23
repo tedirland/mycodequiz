@@ -17,7 +17,7 @@
     <a class="navbar-brand" href='#'>View High Scores</a>
 
     <div class="d-flex flex-row bd-highlight">
-        <div id='seconds'>75</div>
+        <h3 id='seconds'>75</h3>
 
     </div>
 
@@ -71,10 +71,19 @@
 
             setTime();
             renderQuestions();
-
-
-
         });
+
+        $(".navbar-brand").on("click", () => {
+            $(".jumbotron").html("<card>" +
+
+                "<h1>" + "High Scores" + "</h1>" + " <hr>" +
+
+                // ** Display Items from Local memory to a new ul inside card - still need to add this code
+
+                "<button id='goBack' class = 'btn btn-primary'>" + "Go Back" + "</button>" + "<button id='clearScores' class = 'btn btn-primary'>" + "Clear Scores" + "</button>" +
+
+                "</card>");
+        })
 
 
 

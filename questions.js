@@ -9,8 +9,6 @@ var quizEl = document.getElementById('#quiz');
 // Timer Variables
 
 var secondsLeft = 75;
-var timeLeft = 0;
-var secondsElapsed = 0;
 var interval;
 
 //Score and Question Index Variables
@@ -62,18 +60,6 @@ var questions = [
 ];
 
 
-
-// Creating Functions here
-
-// Clears jumbotron content on click
-// function startQuiz() {
-
-// $(".jumbotron").empty();
-
-
-
-// }
-
 function startTimer() {
 
 }
@@ -86,9 +72,9 @@ function setTime() {
     secondsLeft--;
     $("#seconds").text(secondsLeft)
 
-    if (secondsLeft === 0 || runningQuestionIndex >4) {
+    if (secondsLeft === 0 || runningQuestionIndex > 4) {
       clearInterval(timerInterval)
-      
+
     }
 
   }, 1000);
@@ -98,7 +84,7 @@ function allDone() { //Start of allDone Function
 
   $('#seconds').html(
     "<h3>" + "Quiz Complete!" + "</h3>"
-    
+
   );
 
   $(".jumbotron").html("<card>" +
@@ -108,20 +94,32 @@ function allDone() { //Start of allDone Function
     "<h6>" + "Your final score is : " + score + "</h6>" +
 
 
-    "<form> " + "Enter Initials: " + "<input type='text name='initials' id='initials'>" + "<p>" + ' ' + "</p>" + "<button id='submitInitials' class = 'btn btn-primary'>" + "Submit" + "</button>" +
+    "<form> " + "Enter Initials: " + "<input type='text name='initials' class='initials'>" + "<p>" + ' ' + "</p>" + "<button class = 'submit btn btn-primary'>" + "Submit" + "</button>" +
 
     "</card>"
   )
 
 
-
+  var targetedInitials = document.querySelector(".initials") 
+  
+  
   // Event Listener to generate final screen
+  
+  $(".submit").on("click", () => {
+    
+    var s =0
 
-  $(".btn").on("click", () => {
+    
+    var userDetials = {
+      
+      initials: $(targetedInitials).val(), 
+      finalscore: score
+    };
+    
+    console.log(userDetials);
 
-    // var userInitials = document.getElementById('initials')
 
-    // var userDetials = {
+    localStorage.setItem("User Details", JSON.stringify(userDetials));
 
     //   initials: userInitials.nodeValue.trim(),
     //   userScore: score 
@@ -129,16 +127,18 @@ function allDone() { //Start of allDone Function
     // };
 
 
-
+var highScores = JSON.parse(localStorage.getItem("User Details"));
     // **//Add Initials to Local Memory - still need to add this code
 
     $(".jumbotron").html("<card>" +
 
-      "<h1>" + "High Scores" + "</h1>" + " <hr>" +
+      "<h1>" + "High Scores" + "</h1>" + " <hr>" + 
+
+      "<h3 class='highscore'>" + highScores.initials+ ":" + highScores.finalscore + "</h3>" +
 
       // ** Display Items from Local memory to a new ul inside card - still need to add this code
 
-      "<button id='goBack' class = 'btn btn-primary'>" + "Go Back" + "</button>" + "<button id='clearScores' class = 'btn btn-primary'>" + "Clear Scores" + "</button>" +
+      "<button id='goBack' class = 'btn btn-primary'>" + "Go Back" + "</button>" + "<button id='clearScores' class = 'clear btn btn-primary'>" + "Clear Scores" + "</button>" +
 
       "</card>");
 
@@ -148,11 +148,11 @@ function allDone() { //Start of allDone Function
 
     // location.reload();
 
-  });
+  })
 
-  $('#clearScores').on("click", () => {
+  $('.clear').on("click", () => {
 
-    // ** $('.leaderboard').empty();
+   localStorage.clear;
 
 
 
@@ -164,22 +164,6 @@ function allDone() { //Start of allDone Function
 // setTimeout(fade_out, 500);
 
 
-function checkAnswers() {
-
-  // if (questions[runningQuestionIndex].answer == )
-
-  $("#resultsPane").html("<hr>" + "<h1>" + "Test" + "</h1>")
-
-  function timeOutResults() {
-
-    document.getElementById("resultsPane").style.display = "none";
-
-
-  }
-
-  window.setTimeout(timeOutResults, 1000); // How do I get this to happen for each instance
-
-}
 
 
 
@@ -223,31 +207,35 @@ function renderQuestions() {
 
 
     // checkAnswers();
-    
+
     console.log(questions[runningQuestionIndex].answer);
     console.log($(event.target).text());
-    
-    
-    
+
+
+
     if ($(event.target).text() === questions[runningQuestionIndex].answer) {
-      
+
       score += 20;
+
+  $("#resultsPane").html("<hr>" + "<h1>" + "Correct!" + "</h1>")
       
+
     }
-    
+
     else {
-      
+
       score -= 10;
-      
+      secondsLeft -= 15;
+      $("#resultsPane").html("<hr>" + "<h1>" + "wrong" + "</h1>")
     }
-    
-    
+
+
     runningQuestionIndex++;
 
     if (runningQuestionIndex > 4) {
       allDone();
     } else {
-      checkAnswers(), renderQuestions()
+       renderQuestions()
     };
 
 
