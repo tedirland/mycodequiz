@@ -119,65 +119,91 @@ function renderQuestions() {
   let lastQuestionIndex = questions.length - 1;
   let choiceIndex = 0;
 
-  
+
   function allDone() {
-  
-    $(".jumbotron").html(
+
+    $(".jumbotron").html("<card>" +
 
       "<h3>" + "All Done!" + "</h3>" +
 
-      "<h6>" + "Your final score is : " + score + "</h6>" +
+      "<h6>" + "Your final score is : " + score + "</h6>" + 
 
 
-      "<form> " + "Enter Initials: " + "<input type='text name='initials'>" + "<button id='submitInitials' class = 'btn btn-primary'>" + "Submit" + "</button>"
+      "<form> " + "Enter Initials: " + "<input type='text name='initials'>"  + "<button id='submitInitials' class = 'btn btn-primary'>" + "Submit" + "</button>" +
+
+      "</card>"
     )
 
 
-  }
+    $(".btn").on("click", () => {
 
-  // for (var i = 0; i < questions.length; i++) {
+      //Add Initials to Local Memory
 
+      $(".jumbotron").html("<card>" +
 
-  $(".jumbotron").html("<card>" +
+        "<h1>" + "High Scores" + "</h1>" + " <hr>" +
 
-    "<h1>" + questions[runningQuestionIndex].title + "</h1>" +
+        //Items pulled from local memory 
 
-    "<ul>" +
+        "<button id='goBack' class = 'btn btn-primary'>" + "Go Back" + "</button>"  + "<button id='clearScores' class = 'btn btn-primary'>" + "Clear Scores" + "</button>" +
 
-    "<li>" + "<button id= 'choiceA' class='btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex] + "</button>" + "</li>" +
-
-    "<li>" + "<button id= 'choiceB' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 1] + "</button>" + "</li>" +
-
-    "<li>" + "<button  id= 'choiceC'class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 2] + "</button>" + "</li>" +
-
-    "<li>" + "<button id= 'choiceD' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 3] + "</button>" + "</li>" +
-
-    "</ul>" +
-
-
-    "</card>");
-
-  // console.log(event.target);
-
-  $('.btn').on("click", () => {
-
-    // checkAnswers();
-    runningQuestionIndex++;
-
-    // checkanswers();
-    if (runningQuestionIndex > 4) {
-      allDone();
-    }
-
-    else (renderQuestions()); 
-   
+        "</card>");
 
 
 
+
+  
 
 
 
   })
+
+  //End of Alldone Function
+};
+
+// for (var i = 0; i < questions.length; i++) {
+
+
+$(".jumbotron").html("<card>" +
+
+  "<h1>" + questions[runningQuestionIndex].title + "</h1>" +
+
+  "<ul>" +
+
+  "<li>" + "<button id= 'choiceA' class='btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex] + "</button>" + "</li>" +
+
+  "<li>" + "<button id= 'choiceB' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 1] + "</button>" + "</li>" +
+
+  "<li>" + "<button  id= 'choiceC'class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 2] + "</button>" + "</li>" +
+
+  "<li>" + "<button id= 'choiceD' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 3] + "</button>" + "</li>" +
+
+  "</ul>" +
+
+
+  "</card>");
+
+// console.log(event.target);
+
+$('.btn').on("click", () => {
+
+  // checkAnswers();
+  runningQuestionIndex++;
+
+  // checkanswers();
+  if (runningQuestionIndex > 4) {
+    allDone();
+  }
+
+  else (renderQuestions());
+
+
+
+
+
+
+
+})
 
 
 
