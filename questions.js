@@ -57,33 +57,22 @@ var questions = [
     choices: ["Java on Node", "Javascript Object Notation", "JQuery Obtain Nanodata", "JavaScript Orientation Notation"],
     answer: "Javascript Object Notation"
 
-  },
+  }
 
 ];
-
-//Timer Function
-
-// function renderQuestions() {
-//   let q = questions[runningQuestionIndex];
-//   $('.jumbotron').innerHTML = 
-
-// //   };
-// for (var i = 0; i < questions.length; i++) {
-
-// }
 
 
 
 // Creating Functions here
 
 // Clears jumbotron content on click
-function startQuiz() {
+// function startQuiz() {
 
-  $(".jumbotron").empty();
+// $(".jumbotron").empty();
 
 
 
-}
+// }
 
 function startTimer() {
 
@@ -97,117 +86,180 @@ function setTime() {
     secondsLeft--;
     $("#seconds").text(secondsLeft)
 
-    if (secondsLeft === 0) {
+    if (secondsLeft === 0 || runningQuestionIndex >4) {
       clearInterval(timerInterval)
+      
     }
 
   }, 1000);
 }
 
+function allDone() { //Start of allDone Function
 
-// function checkAnswers() {
+  $('#seconds').html(
+    "<h3>" + "Quiz Complete!" + "</h3>"
+    
+  );
 
-//   if (questions[runningQuestionIndex].answer == )
+  $(".jumbotron").html("<card>" +
 
+    "<h3>" + "All Done!" + "</h3>" +
 
-
-//     // }
-// Rendering Questions
-
-function renderQuestions() {
-
-  let lastQuestionIndex = questions.length - 1;
-  let choiceIndex = 0;
+    "<h6>" + "Your final score is : " + score + "</h6>" +
 
 
-  function allDone() {
+    "<form> " + "Enter Initials: " + "<input type='text name='initials' id='initials'>" + "<p>" + ' ' + "</p>" + "<button id='submitInitials' class = 'btn btn-primary'>" + "Submit" + "</button>" +
+
+    "</card>"
+  )
+
+
+
+  // Event Listener to generate final screen
+
+  $(".btn").on("click", () => {
+
+    // var userInitials = document.getElementById('initials')
+
+    // var userDetials = {
+
+    //   initials: userInitials.nodeValue.trim(),
+    //   userScore: score 
+
+    // };
+
+
+
+    // **//Add Initials to Local Memory - still need to add this code
 
     $(".jumbotron").html("<card>" +
 
-      "<h3>" + "All Done!" + "</h3>" +
+      "<h1>" + "High Scores" + "</h1>" + " <hr>" +
 
-      "<h6>" + "Your final score is : " + score + "</h6>" + 
+      // ** Display Items from Local memory to a new ul inside card - still need to add this code
 
+      "<button id='goBack' class = 'btn btn-primary'>" + "Go Back" + "</button>" + "<button id='clearScores' class = 'btn btn-primary'>" + "Clear Scores" + "</button>" +
 
-      "<form> " + "Enter Initials: " + "<input type='text name='initials'>"  + "<button id='submitInitials' class = 'btn btn-primary'>" + "Submit" + "</button>" +
+      "</card>");
 
-      "</card>"
-    )
+  })
 
+  $(".goback").on("click", () => {
 
-    $(".btn").on("click", () => {
+    // location.reload();
 
-      //Add Initials to Local Memory
+  });
 
-      $(".jumbotron").html("<card>" +
+  $('#clearScores').on("click", () => {
 
-        "<h1>" + "High Scores" + "</h1>" + " <hr>" +
+    // ** $('.leaderboard').empty();
 
-        //Items pulled from local memory 
-
-        "<button id='goBack' class = 'btn btn-primary'>" + "Go Back" + "</button>"  + "<button id='clearScores' class = 'btn btn-primary'>" + "Clear Scores" + "</button>" +
-
-        "</card>");
-
-
-
-
-  
 
 
 
   })
 
-  //End of Alldone Function
-};
+};//End of Alldone Function
 
-// for (var i = 0; i < questions.length; i++) {
-
-
-$(".jumbotron").html("<card>" +
-
-  "<h1>" + questions[runningQuestionIndex].title + "</h1>" +
-
-  "<ul>" +
-
-  "<li>" + "<button id= 'choiceA' class='btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex] + "</button>" + "</li>" +
-
-  "<li>" + "<button id= 'choiceB' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 1] + "</button>" + "</li>" +
-
-  "<li>" + "<button  id= 'choiceC'class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 2] + "</button>" + "</li>" +
-
-  "<li>" + "<button id= 'choiceD' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 3] + "</button>" + "</li>" +
-
-  "</ul>" +
+// setTimeout(fade_out, 500);
 
 
-  "</card>");
+function checkAnswers() {
 
-// console.log(event.target);
+  // if (questions[runningQuestionIndex].answer == )
 
-$('.btn').on("click", () => {
+  $("#resultsPane").html("<hr>" + "<h1>" + "Test" + "</h1>")
 
-  // checkAnswers();
-  runningQuestionIndex++;
+  function timeOutResults() {
 
-  // checkanswers();
-  if (runningQuestionIndex > 4) {
-    allDone();
+    document.getElementById("resultsPane").style.display = "none";
+
+
   }
 
-  else (renderQuestions());
+  window.setTimeout(timeOutResults, 1000); // How do I get this to happen for each instance
+
+}
+
+
+
+
+// Start of Render Questions Function
+function renderQuestions() {
+
+  let lastQuestionIndex = questions.length - 1;
+  let choiceIndex = 0;
+
+  // Code that dynamically renders questions based on runningQuesitonIndex variable and choice index variable
+
+  $(".jumbotron").html("<card class= 'quizPane'>" +
+
+    "<h1>" + questions[runningQuestionIndex].title + "</h1>" +
+
+    "<ul>" +
+
+    "<li>" + "<button id= 'choiceA' class='answer btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex] + "</button>" + "</li>" +
+
+    "<li>" + "<button id= 'choiceB' class= 'answer btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 1] + "</button>" + "</li>" +
+
+    "<li>" + "<button  id= 'choiceC'class=  'answer btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 2] + "</button>" + "</li>" +
+
+    "<li>" + "<button id= 'choiceD' class= 'answer btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 3] + "</button>" + "</li>" +
+
+    // "<li>" + "<button id= 'choiceD' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].answer + "</button>" + "</li>" +
+
+    "</ul>" +
+
+
+    "</card>");
+
+  // console.log(event.target);
+
+  //Event listener when an option is clicked
+  $('.btn').on("click", () => {
+
+    console.log($(event.target).text() === questions[runningQuestionIndex].answer);
+    console.log("score", score);
+
+
+    // checkAnswers();
+    
+    console.log(questions[runningQuestionIndex].answer);
+    console.log($(event.target).text());
+    
+    
+    
+    if ($(event.target).text() === questions[runningQuestionIndex].answer) {
+      
+      score += 20;
+      
+    }
+    
+    else {
+      
+      score -= 10;
+      
+    }
+    
+    
+    runningQuestionIndex++;
+
+    if (runningQuestionIndex > 4) {
+      allDone();
+    } else {
+      checkAnswers(), renderQuestions()
+    };
 
 
 
 
 
 
-
-})
-
+  })
 
 
 };
+//End of Render Questions Function
 
 // }
 
@@ -215,11 +267,11 @@ $('.btn').on("click", () => {
 
 // Score Functions
 
-function answerIsCorrect() {
+// function answerIsCorrect() {
 
 
-}
+// }
 
-function answerisWrong() {
+// function answerisWrong() {
 
-}
+// }

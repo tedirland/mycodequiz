@@ -49,14 +49,15 @@
         <h2 class="display-1"><strong> Coding Quiz</strong> </h2>
         <p><strong> Try to answer the coding questions in the time allotted! You will be given a limited amount of time
                 to answer, so work quickly! </strong> </p>
-        <br>
-        <p><strong>At the end of the time given, youh2 will be given a score based on the amount of correct answers and
+
+        <p><strong>At the end of the time given, you will be given a score based on the amount of correct answers and
                 time remaining.</strong></p>
         <p>Click the button below to get started!</p>
         <button type="button" id="myButton">Start Quiz</button>
 
 
     </div>
+    <div id="resultsPane"> </div>
 
     <script>
 
@@ -68,29 +69,28 @@
 
         $('#myButton').on('click', () => {
 
-            startQuiz();
-            renderQuestions();
             setTime();
-            
+            renderQuestions();
+
 
 
         });
 
 
 
-        $('#choices').on('click', () => {
+        // $('#choices').on('click', () => {
 
-            function checkanswers() {
+        //     function checkanswers() {
 
-                if (this.questions[i].choice) {
-                    
-                }
+        //         if (this.questions[i].choice) {
 
-            }
+        //         }
+
+        //     }
 
 
 
-        })
+        // })
 
 
 
