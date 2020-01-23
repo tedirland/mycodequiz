@@ -112,64 +112,88 @@ function setTime() {
 
 
 //     // }
-    // Rendering Questions
+// Rendering Questions
 
-    function renderQuestions() {
+function renderQuestions() {
 
-      let lastQuestionIndex = questions.length - 1;
-      let choiceIndex=0;
+  let lastQuestionIndex = questions.length - 1;
+  let choiceIndex = 0;
 
-      // for (var i = 0; i < questions.length; i++) {
+  
+  function allDone() {
+  
+    $(".jumbotron").html(
 
+      "<h3>" + "All Done!" + "</h3>" +
 
-      $(".jumbotron").html("<card>" +
-
-        "<h1>" + questions[runningQuestionIndex].title + "</h1>" +
-
-        "<ul>" +
-
-        "<li>" + "<button id= 'choiceA' class='btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex] + "</button>" + "</li>" +
-
-        "<li>" + "<button id= 'choiceB' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex+1] + "</button>" + "</li>" +
-
-        "<li>" + "<button  id= 'choiceC'class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex+2] + "</button>" + "</li>" +
-
-        "<li>" + "<button id= 'choiceD' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex+3] + "</button>" + "</li>" +
-
-        "</ul>" +
+      "<h6>" + "Your final score is : " + score + "</h6>" +
 
 
-        "</card>");
-
-        // console.log(event.target);
-    
-      $('.btn').on("click", () => {
-
-        // checkAnswers();
-        runningQuestionIndex++;
-        renderQuestions();
-
-
-
-
-
-      })
-
-
-
-    };
-
-  // }
-
-
-
-  // Score Functions
-
-  function answerIsCorrect() {
+      "<form> " + "Enter Initials: " + "<input type='text name='initials'>" + "<button id='submitInitials' class = 'btn btn-primary'>" + "Submit" + "</button>"
+    )
 
 
   }
 
-  function answerisWrong() {
+  // for (var i = 0; i < questions.length; i++) {
 
-  }
+
+  $(".jumbotron").html("<card>" +
+
+    "<h1>" + questions[runningQuestionIndex].title + "</h1>" +
+
+    "<ul>" +
+
+    "<li>" + "<button id= 'choiceA' class='btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex] + "</button>" + "</li>" +
+
+    "<li>" + "<button id= 'choiceB' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 1] + "</button>" + "</li>" +
+
+    "<li>" + "<button  id= 'choiceC'class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 2] + "</button>" + "</li>" +
+
+    "<li>" + "<button id= 'choiceD' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 3] + "</button>" + "</li>" +
+
+    "</ul>" +
+
+
+    "</card>");
+
+  // console.log(event.target);
+
+  $('.btn').on("click", () => {
+
+    // checkAnswers();
+    runningQuestionIndex++;
+
+    // checkanswers();
+    if (runningQuestionIndex > 4) {
+      allDone();
+    }
+
+    else (renderQuestions()); 
+   
+
+
+
+
+
+
+  })
+
+
+
+};
+
+// }
+
+
+
+// Score Functions
+
+function answerIsCorrect() {
+
+
+}
+
+function answerisWrong() {
+
+}
