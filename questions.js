@@ -17,11 +17,6 @@ var score = 0;
 
 let runningQuestionIndex = 0;
 
-// var score = 0;
-// // var lastQuestionIndex = questions.length - 1;
-// var runningQuestionIndex = 0;
-
-
 
 
 // Questions Stored in an Object
@@ -72,10 +67,14 @@ function setTime() {
     secondsLeft--;
     $("#seconds").text(secondsLeft)
 
-    if (secondsLeft === 0 || runningQuestionIndex > 4) {
+    if (secondsLeft === 0) {
       clearInterval(timerInterval)
+    } else if (runningQuestionIndex > 4) {
+      $('#seconds').text("");
 
     }
+    
+  
 
   }, 1000);
 }
@@ -100,22 +99,22 @@ function allDone() { //Start of allDone Function
   )
 
 
-  var targetedInitials = document.querySelector(".initials") 
-  
-  
-  // Event Listener to generate final screen
-  
-  $(".submit").on("click", () => {
-    
-    var s =0
+  var targetedInitials = document.querySelector(".initials")
 
-    
+
+  // Event Listener to generate final screen
+
+  $(".submit").on("click", () => {
+
+    var s = 0
+
+
     var userDetials = {
-      
-      initials: $(targetedInitials).val(), 
+
+      initials: $(targetedInitials).val(),
       finalscore: score
     };
-    
+
     console.log(userDetials);
 
 
@@ -127,34 +126,37 @@ function allDone() { //Start of allDone Function
     // };
 
 
-var highScores = JSON.parse(localStorage.getItem("User Details"));
+    var highScores = JSON.parse(localStorage.getItem("User Details"));
     // **//Add Initials to Local Memory - still need to add this code
-
+    
     $(".jumbotron").html("<card>" +
-
-      "<h1>" + "High Scores" + "</h1>" + " <hr>" + 
-
-      "<h3 class='highscore'>" + highScores.initials+ ":" + highScores.finalscore + "</h3>" +
-
-      // ** Display Items from Local memory to a new ul inside card - still need to add this code
-
-      "<button id='goBack' class = 'btn btn-primary'>" + "Go Back" + "</button>" + "<button id='clearScores' class = 'clear btn btn-primary'>" + "Clear Scores" + "</button>" +
-
-      "</card>");
-
-  })
-
-  $(".goback").on("click", () => {
-
-    // location.reload();
-
-  })
-
-  $('.clear').on("click", () => {
-
-   localStorage.clear;
-
-
+    
+    "<h1>" + "High Scores" + "</h1>" + " <hr>" +
+    "<ol class='leaderboard'>" + "<li>" +
+    
+    "<h3 class='highscore'>" + highScores.initials + ": " + highScores.finalscore + "</h3>" +
+    
+    "</li>" + "</ol>" +
+    
+    // ** Display Items from Local memory to a new ul inside card - still need to add this code
+    
+    "<button id='goBack' class = 'btn btn-primary goback'>" + "Go Back" + "</button>" + "<button id='clearScores' class = 'clear btn btn-primary'>" + "Clear Scores" + "</button>" +
+    
+    "</card>");
+    
+    
+    $(".goback").on("click", () => {
+      
+      location.reload();
+      
+    })
+    
+    $('.clear').on("click", () => {
+      
+      localStorage.clear()
+      
+    })
+      
 
 
   })
@@ -162,12 +164,6 @@ var highScores = JSON.parse(localStorage.getItem("User Details"));
 };//End of Alldone Function
 
 // setTimeout(fade_out, 500);
-
-
-
-
-
-
 // Start of Render Questions Function
 function renderQuestions() {
 
@@ -217,8 +213,8 @@ function renderQuestions() {
 
       score += 20;
 
-  $("#resultsPane").html("<hr>" + "<h1>" + "Correct!" + "</h1>")
-      
+      $("#resultsPane").html("<hr>" + "<h1>" + "Correct!" + "</h1>")
+
 
     }
 
@@ -235,7 +231,7 @@ function renderQuestions() {
     if (runningQuestionIndex > 4) {
       allDone();
     } else {
-       renderQuestions()
+      renderQuestions()
     };
 
 

@@ -72,41 +72,50 @@
             setTime();
             renderQuestions();
         });
-
+        var myScores = JSON.parse(localStorage.getItem("User Details"));
         $(".navbar-brand").on("click", () => {
-            $(".jumbotron").html("<card>" +
 
-                "<h1>" + "High Scores" + "</h1>" + " <hr>" +
+           
 
-                // ** Display Items from Local memory to a new ul inside card - still need to add this code
+    //   initials: userInitials.nodeValue.trim(),
+    //   userScore: score 
 
-                "<button id='goBack' class = 'btn btn-primary'>" + "Go Back" + "</button>" + "<button id='clearScores' class = 'btn btn-primary'>" + "Clear Scores" + "</button>" +
+    // };
 
-                "</card>");
+
+    
+    // **//Add Initials to Local Memory - still need to add this code
+    
+    $(".jumbotron").html("<card>" +
+    
+    "<h1>" + "High Scores" + "</h1>" + " <hr>" +
+    "<ol class='leaderboard'>" + "<li>" +
+    
+    "<h3 class='highscore'>" + myScores.initials + ": " + myScores.finalscore + "</h3>" +
+    
+    "</li>" + "</ol>" +
+    
+    // ** Display Items from Local memory to a new ul inside card - still need to add this code
+    
+    "<button id='goBack' class = 'btn btn-primary goback'>" + "Go Back" + "</button>" + "<button id='clearScores' class = 'clear btn btn-primary'>" + "Clear Scores" + "</button>" +
+    
+    "</card>");
+    
+    
+    $(".goback").on("click", () => {
+      
+      location.reload();
+      
+    })
+    
+    $('.clear').on("click", () => {
+      
+      localStorage.clear();
+      
+    })
+      
+        
         })
-
-
-
-        // $('#choices').on('click', () => {
-
-        //     function checkanswers() {
-
-        //         if (this.questions[i].choice) {
-
-        //         }
-
-        //     }
-
-
-
-        // })
-
-
-
-
-
-
-
     </script>
 </body>
 
