@@ -1,4 +1,3 @@
-
 // DOM Elements
 var startButton = document.getElementById('#mybutton');
 var displayPane = document.getElementById("display");
@@ -16,8 +15,6 @@ var interval;
 var score = 0;
 
 let runningQuestionIndex = 0;
-
-
 
 // Questions Stored in an Object
 var questions = [
@@ -50,14 +47,7 @@ var questions = [
     choices: ["Java on Node", "Javascript Object Notation", "JQuery Obtain Nanodata", "JavaScript Orientation Notation"],
     answer: "Javascript Object Notation"
 
-  }
-
-];
-
-
-function startTimer() {
-
-}
+  }];
 
 // Gets formatted seconds to plug into the seconds element
 
@@ -73,24 +63,23 @@ function setTime() {
       $('#seconds').text("");
 
     }
-    
-  
+
+
 
   }, 1000);
 }
-
 function allDone() { //Start of allDone Function
 
   $('#seconds').html(
-    "<h3>" + "Quiz Complete!" + "</h3>"
+    "<h3 class = 'text-success'>" + "Thanks For Playing!" + "</h3>"
 
   );
 
   $(".jumbotron").html("<card>" +
 
-    "<h3>" + "All Done!" + "</h3>" +
+    "<h3 class = 'text-success'>" + "All Done!" + "</h3>" +
 
-    "<h6>" + "Your final score is : " + score + "</h6>" +
+    "<h6 class ='text- info'>" + "Your final score is : " + score + "</h6>" +
 
 
     "<form> " + "Enter Initials: " + "<input type='text name='initials' class='initials'>" + "<p>" + ' ' + "</p>" + "<button class = 'submit btn btn-primary'>" + "Submit" + "</button>" +
@@ -98,15 +87,13 @@ function allDone() { //Start of allDone Function
     "</card>"
   )
 
-
   var targetedInitials = document.querySelector(".initials")
 
 
   // Event Listener to generate final screen
 
+  var topScores = JSON.parse(localStorage.getItem("topscores")) || [];
   $(".submit").on("click", () => {
-
-    var s = 0
 
 
     var userDetials = {
@@ -114,57 +101,54 @@ function allDone() { //Start of allDone Function
       initials: $(targetedInitials).val(),
       finalscore: score
     };
+    topScores.push(userDetials);
+    // I don't get why this code is not appending topscores to the userDetails object?
 
     console.log(userDetials);
+    console.log(topScores)
+
+    var maxhighscore = 5;
+
+    topScores.sort((a, b) => {
+      return b.finalscore - a.finalscore
+    });
+    topScores.splice(5);
+
+    // This is the code to sort and limit top scored to 5. Can't get it to work
+
+    localStorage.setItem('topscores', JSON.stringify(topScores));
+
+    var userScores = JSON.parse(localStorage.getItem("topscores"))
 
 
-    localStorage.setItem("User Details", JSON.stringify(userDetials));
-
-    //   initials: userInitials.nodeValue.trim(),
-    //   userScore: score 
-
-    // };
-
-
-    var highScores = JSON.parse(localStorage.getItem("User Details"));
-    // **//Add Initials to Local Memory - still need to add this code
-    
     $(".jumbotron").html("<card>" +
-    
-    "<h1>" + "High Scores" + "</h1>" + " <hr>" +
-    "<ol class='leaderboard'>" + "<li>" +
-    
-    "<h3 class='highscore'>" + highScores.initials + ": " + highScores.finalscore + "</h3>" +
-    
-    "</li>" + "</ol>" +
-    
-    // ** Display Items from Local memory to a new ul inside card - still need to add this code
-    
-    "<button id='goBack' class = 'btn btn-primary goback'>" + "Go Back" + "</button>" + "<button id='clearScores' class = 'clear btn btn-primary'>" + "Clear Scores" + "</button>" +
-    
-    "</card>");
-    
-    
-    $(".goback").on("click", () => {
-      
-      location.reload();
-      
-    })
-    
-    $('.clear').on("click", () => {
-      
-      localStorage.clear()
-      
-    })
-      
 
+      "<h1>" + "High Scores" + "</h1>" + " <hr>" +
+
+
+      "</card>");
+
+    for (var i = 0; i < userScores.length; i++) {
+      $('.jumbotron').append("<ul>" + "<li>" + "<h3 class='highscore'>" + userScores[i].initials + ": " + userScores[i].finalscore + "</h3>" + "</li>" + "</ul>")
+    }
+
+    $('.jumbotron').append("<button class = 'btn btn-primary goback'>" + "Go Back" + "</button>" + "<button class = 'clear btn btn-primary'>" + "Clear Scores" + "</button>")
+    $(".goback").on("click", () => {
+
+      location.reload();
+
+    })
+
+    $('.clear').on("click", () => {
+
+      localStorage.clear()
+
+    })
 
   })
 
 };//End of Alldone Function
 
-// setTimeout(fade_out, 500);
-// Start of Render Questions Function
 function renderQuestions() {
 
   let lastQuestionIndex = questions.length - 1;
@@ -186,10 +170,7 @@ function renderQuestions() {
 
     "<li>" + "<button id= 'choiceD' class= 'answer btn btn-outline-dark'>" + questions[runningQuestionIndex].choices[choiceIndex + 3] + "</button>" + "</li>" +
 
-    // "<li>" + "<button id= 'choiceD' class= 'btn btn-outline-dark'>" + questions[runningQuestionIndex].answer + "</button>" + "</li>" +
-
     "</ul>" +
-
 
     "</card>");
 
@@ -198,64 +179,36 @@ function renderQuestions() {
   //Event listener when an option is clicked
   $('.btn').on("click", () => {
 
-    console.log($(event.target).text() === questions[runningQuestionIndex].answer);
-    console.log("score", score);
+    // console.log($(event.target).text() === questions[runningQuestionIndex].answer);
+    // console.log("score", score);
 
-
-    // checkAnswers();
-
-    console.log(questions[runningQuestionIndex].answer);
-    console.log($(event.target).text());
-
-
+    // console.log(questions[runningQuestionIndex].answer);
+    // console.log($(event.target).text());
 
     if ($(event.target).text() === questions[runningQuestionIndex].answer) {
 
-      score += 20;
+      score += 50;
 
-      $("#resultsPane").html("<hr>" + "<h1>" + "Correct!" + "</h1>")
+      $("#resultsPane").html("<hr>" + "<h1 class = 'text-success'>" + "Correct!" + "</h1>")
+      $('#resultsPane').attr("class = bg-success")
 
+    } else {
 
-    }
-
-    else {
-
-      score -= 10;
+      score -= 20;
       secondsLeft -= 15;
-      $("#resultsPane").html("<hr>" + "<h1>" + "wrong" + "</h1>")
+      $("#resultsPane").html("<hr>" + "<h1 class = 'text-danger' >" + "wrong" + "</h1>")
     }
-
-
     runningQuestionIndex++;
 
     if (runningQuestionIndex > 4) {
+      $("#resultsPane").empty();
       allDone();
     } else {
       renderQuestions()
     };
 
-
-
-
-
-
   })
-
-
 };
 //End of Render Questions Function
-
-// }
-
-
-
-// Score Functions
-
-// function answerIsCorrect() {
-
-
-// }
-
-// function answerisWrong() {
 
 // }
